@@ -1,0 +1,50 @@
+﻿@model CarBackend.XEGANMAY
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+<div class="container my-5" ">
+    <h2 class="text-center mb-4 display-6 text-primary">Car Details</h2>
+
+    <div class="row align-items-center gy-5" ">
+        <!-- Car Image Section -->
+        <div class="col-lg-6">
+            <div class="card shadow border-0">
+                <img src="~/Content/images/@Model.Anhbia" alt="@Model.TenXe"
+                     class="card-img-top rounded elegant-img">
+            </div>
+        </div>
+
+        <!-- Car Details Section -->
+        <div class="col-lg-6">
+            <div class="card border-0 shadow-lg p-4 elegant-card">
+                <!-- Car Title -->
+                <h1 class="display-6 fw-bold text-primary mb-3">@Html.DisplayFor(model => model.TenXe)</h1>
+
+                <!-- Description -->
+                <h5 class="text-secondary fw-bold mb-2">Description</h5>
+                <p class="text-muted mb-4">@Html.DisplayFor(model => model.Mota)</p>
+
+                <!-- Price -->
+                <h5 class="text-secondary fw-bold mb-2">Price</h5>
+                <h3 class="text-success fw-bold mb-4">@Html.DisplayFor(model => model.Giaban) VND</h3>
+
+                <!-- Add to Cart Form -->
+                <form action="@Url.Action("AddToCart", "Cart")" method="post">
+                    <input type="hidden" name="carId" value="@Model.MaXe" />
+                    <input type="hidden" name="strURL" value="@Url.Action("Cart", "Cart")" />
+                    <button type="submit" class="btn btn-gradient btn-lg w-100">
+                        <i class="fa fa-shopping-cart me-2"></i>Add to Cart
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Back to List Section -->
+    <div class="mt-5 text-center">
+        @Html.ActionLink("Back to List", "Index", "CarStore", null, new { @class = "btn btn-outline-secondary btn-lg fw-bold" })
+    </div>
+</div>

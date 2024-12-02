@@ -1,0 +1,90 @@
+﻿@{
+    ViewBag.Title = "Signin";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+<div class="container my-5">
+    <h2 class="text-center text-primary mb-4">Sign In</h2>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <!-- Validation Summary -->
+        @Html.ValidationSummary(true, "", new { @class = "text-danger mb-3" })
+
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <!-- Username Field -->
+                <div class="mb-3">
+                    <label for="username" class="form-label">Username</label>
+                    @Html.TextBox("username", null, new { @class = "form-control", id = "username" })
+                    <span class="text-danger">@ViewData["err1"]</span>
+                </div>
+
+                <!-- Password Field -->
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    @Html.Password("password", null, new { @class = "form-control", id = "password" })
+                    <span class="text-danger">@ViewData["err2"]</span>
+                </div>
+
+                <!-- Submit Button -->
+                <div class="d-grid gap-2 mt-4">
+                    <button type="submit" class="btn btn-primary btn-lg">Sign In</button>
+                </div>
+
+                <!-- Announcement/Error Message -->
+                @if (ViewBag.announcement != null)
+                {
+                    <div class="text-center text-danger mt-3">
+                        <span>@ViewBag.announcement</span>
+                    </div>
+                }
+
+                <!-- Option for registration -->
+                <div class="text-center mt-4">
+                    <p>Don't have an account? <a href="@Url.Action("Signup", "User")" class="text-primary">Sign up here</a></p>
+                </div>
+            </div>
+        </div>
+    }
+    <style>
+        .container {
+            max-width: 500px;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            font-weight: bold;
+        }
+
+        .form-label {
+            font-weight: bold;
+        }
+
+        .text-danger {
+            font-size: 0.875rem;
+        }
+
+        .btn-lg {
+            padding: 0.75rem 1.5rem;
+            font-size: 1.25rem;
+        }
+
+        .d-grid {
+            display: grid;
+        }
+
+        .text-primary {
+            color: #007bff;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+    </style>
+</div>
+
+   
+
