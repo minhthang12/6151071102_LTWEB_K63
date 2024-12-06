@@ -1,0 +1,108 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Login V1</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--===============================================================================================-->
+    <link rel="icon" type="image/png" href="~/Content/images/icons/favicon.ico" />
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/Content/css/vendor/bootstrap/css/bootstrap.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/Content/css/vendor/animate/animate.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/Content/css/vendor/css-hamburgers/hamburgers.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/Content/css/vendor/select2/select2.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/Content/css/util.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/css/main.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/css/adminLogin.css">
+    <!--===============================================================================================-->
+</head>
+<body>
+
+    <div class="limiter">
+        <div class="container-login100">
+            <div class="wrap-login100">
+                <div class="login100-pic js-tilt" data-tilt>
+                    <img src="~/Content/images/img-01.png" alt="IMG">
+                </div>
+
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+
+                    <!-- Validation Summary -->
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger mb-3" })
+
+                    <div class="row justify-content-center">
+                        <div class="col-md-6">
+                            <!-- Username Field -->
+                            <div class="mb-3">
+                                <label for="username" class="form-label">Username</label>
+                                @Html.TextBox("username", null, new { @class = "form-control", id = "username" })
+                                <span class="text-danger">@ViewData["err1"]</span>
+                            </div>
+
+                            <!-- Password Field -->
+                            <div class="mb-3">
+                                <label for="password" class="form-label">Password</label>
+                                @Html.Password("password", null, new { @class = "form-control", id = "password" })
+                                <span class="text-danger">@ViewData["err2"]</span>
+                            </div>
+
+                            <!-- Submit Button -->
+                            <div class="d-grid gap-2 mt-4">
+                                <button type="submit" class="btn btn-primary btn-lg">Sign In</button>
+                            </div>
+
+                            <!-- Announcement/Error Message -->
+                            @if (ViewBag.announcement != null)
+                            {
+                                <div class="text-center text-danger mt-3">
+                                    <span>@ViewBag.announcement</span>
+                                </div>
+                            }
+
+                            <!-- Option for registration -->
+                            <div class="text-center mt-4">
+                                <p>Don't have an account? <a href="@Url.Action("Signup", "User")" class="text-primary">Sign up here</a></p>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+    <!--===============================================================================================-->
+    <script src="~/Content/css/vendor/jquery/jquery-3.2.1.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="~/Content/css/vendor/bootstrap/js/popper.js"></script>
+    <script src="~/Content/css/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="~/Content/css/vendor/select2/select2.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="~/Content/css/vendor/tilt/tilt.jquery.min.js"></script>
+    <script>
+        $('.js-tilt').tilt({
+            scale: 1.1
+        })
+    </script>
+    <!--===============================================================================================-->
+    <script src="js/main.js"></script>
+
+</body>
+</html>

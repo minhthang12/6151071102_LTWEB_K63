@@ -16,7 +16,7 @@ namespace CarBackend
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "User", action = "signup", id = UrlParameter.Optional }
+                defaults: new { controller = "Admin", action = "Login", id = UrlParameter.Optional }
             );
         }
     }

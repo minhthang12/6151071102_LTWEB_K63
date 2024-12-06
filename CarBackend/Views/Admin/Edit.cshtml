@@ -1,0 +1,88 @@
+﻿@model CarBackend.XEGANMAY
+
+@{
+    ViewBag.Title = "Edit Car";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="container mt-4">
+    <h2 class="text-center text-primary mb-4">Edit Car</h2>
+
+    @using (Html.BeginForm("Edit", "Admin", FormMethod.Post, new { @class = "needs-validation", novalidate = "novalidate", @enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="card shadow border-0">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0">Car Information</h5>
+            </div>
+            <div class="card-body">
+                @Html.ValidationSummary(true, "", new { @class = "alert alert-danger" })
+
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <strong>@Html.DisplayNameFor(model => model.MaXe):</strong>
+                        <p>@Html.DisplayFor(model => model.MaXe)</p>
+                        @Html.HiddenFor(model => model.MaXe)
+                    </div>
+                    <div class="col-md-6">
+                        @Html.LabelFor(model => model.TenXe, "Car Name", new { @class = "form-label" })
+                        @Html.EditorFor(model => model.TenXe, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.TenXe, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-12">
+                        @Html.LabelFor(model => model.Giaban, "Price", new { @class = "form-label" })
+                        @Html.EditorFor(model => model.Giaban, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Giaban, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-12">
+                        @Html.LabelFor(model => model.Mota, "Description", new { @class = "form-label" })
+                        @Html.TextAreaFor(model => model.Mota, new { @class = "form-control" })
+
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        @Html.LabelFor(model => model.Anhbia, "Image", new { @class = "form-label" })
+                        <input type="file" name="fileUpload" />
+
+                        @ViewBag.Announce
+                    </div>
+                    <div class="col-md-6">
+                        @Html.LabelFor(model => model.Ngaycapnhat, "Updated Date", new { @class = "form-label" })
+                        @Html.EditorFor(model => model.Ngaycapnhat, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Ngaycapnhat, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        @Html.LabelFor(model => model.Soluongton, "Stock Quantity", new { @class = "form-label" })
+                        @Html.EditorFor(model => model.Soluongton, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Soluongton, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-md-6">
+                        @Html.LabelFor(model => model.MaLX, "Category ID", new { @class = "form-label" })
+                        @Html.DropDownList("MaLX")
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        @Html.LabelFor(model => model.MaNPP, "Supplier ID", new { @class = "form-label" })
+                        @Html.DropDownList("MaNPP")
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-footer text-center">
+                <button type="submit" class="btn btn-primary me-3">Save Changes</button>
+                @Html.ActionLink("Back to List", "Cars", null, new { @class = "btn btn-secondary" })
+            </div>
+        </div>
+    }
+</div>

@@ -1,0 +1,106 @@
+﻿@model CarBackend.XEGANMAY
+
+@{
+    ViewBag.Title = "AddNewBook";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+<h2 class="text-center text-primary mb-4">Add New Car</h2>
+
+@using (Html.BeginForm("AddNewCar", "Admin", FormMethod.Post, new {@enctype = "multipart/form-data"} ))
+{
+    @Html.AntiForgeryToken()
+
+<div class="container">
+    <h4 class="text-secondary">Add a New Car</h4>
+    <hr />
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="row mb-3">
+        @Html.LabelFor(model => model.MaXe, htmlAttributes: new { @class = "col-sm-2 col-form-label" })
+        <div class="col-sm-10">
+            @Html.EditorFor(model => model.MaXe, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.MaXe, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        @Html.LabelFor(model => model.TenXe, htmlAttributes: new { @class = "col-sm-2 col-form-label" })
+        <div class="col-sm-10">
+            @Html.EditorFor(model => model.TenXe, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.TenXe, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        @Html.LabelFor(model => model.Giaban, htmlAttributes: new { @class = "col-sm-2 col-form-label" })
+        <div class="col-sm-10">
+            @Html.EditorFor(model => model.Giaban, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Giaban, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        @Html.LabelFor(model => model.Mota, htmlAttributes: new { @class = "col-sm-2 col-form-label" })
+        <div class="col-sm-10">
+            <textarea name="Mota">Book's Description</textarea>
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        @Html.LabelFor(model => model.Anhbia, htmlAttributes: new { @class = "col-sm-2 col-form-label" })
+        <div class="col-sm-10">
+            <input type="file" id="fileUpload" name="fileUpload" accept="image/*" class="form-control" onchange="previewImage(event)" />
+
+            @ViewBag.Announce
+        </div>
+    </div>
+
+
+    <div class="row mb-3">
+        @Html.LabelFor(model => model.Ngaycapnhat, htmlAttributes: new { @class = "col-sm-2 col-form-label" })
+        <div class="col-sm-10">
+            <input type="date" name="Ngaycapnhat" />
+            @Html.ValidationMessageFor(model => model.Ngaycapnhat, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        @Html.LabelFor(model => model.Soluongton, htmlAttributes: new { @class = "col-sm-2 col-form-label" })
+        <div class="col-sm-10">
+            @Html.EditorFor(model => model.Soluongton, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Soluongton, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        @Html.LabelFor(model => model.MaLX, htmlAttributes: new { @class = "col-sm-2 col-form-label" })
+        <div class="col-md-10">
+            @Html.DropDownList("MaLX")
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        @Html.LabelFor(model => model.MaNPP, htmlAttributes: new { @class = "col-sm-2 col-form-label" })
+        <div class="col-md-10">
+            @Html.DropDownList("MaNPP")
+        </div>
+    </div>
+
+    <div class="row mb-4">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-8">
+            <button type="submit" class="btn btn-primary">Create Car</button>
+        </div>
+        <div class="col-sm-2">
+            <button type="button" style="width: 200px" class="btn btn-primary">Back To Home</button>
+        </div>
+    </div>
+</div>
+}
+
+<div class="mt-3">
+    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-secondary" })
+</div>

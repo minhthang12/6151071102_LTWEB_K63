@@ -1,0 +1,74 @@
+﻿@model CarBackend.XEGANMAY
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="container mt-4">
+    <h2 class="text-center text-danger mb-4">Confirm Deletion</h2>
+    <p class="text-center">Are you sure you want to delete this car?</p>
+
+    <div class="card shadow border-0">
+        <div class="card-header bg-danger text-white">
+            <h5 class="mb-0">Car Information</h5>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <strong>@Html.DisplayNameFor(model => model.MaXe):</strong>
+                    <p>@Html.DisplayFor(model => model.MaXe)</p>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <strong>@Html.DisplayNameFor(model => model.TenXe):</strong>
+                    <p>@Html.DisplayFor(model => model.TenXe)</p>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <strong>@Html.DisplayNameFor(model => model.Giaban):</strong>
+                    <p>@Html.DisplayFor(model => model.Giaban)</p>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <strong>@Html.DisplayNameFor(model => model.Mota):</strong>
+                    <p>@Html.DisplayFor(model => model.Mota)</p>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <strong>@Html.DisplayNameFor(model => model.Anhbia):</strong>
+                    <p>
+                        @if (!string.IsNullOrEmpty(Model.Anhbia))
+                        {
+                            <img src="~/Content/images/@Model.Anhbia" alt="Car Image" class="img-fluid rounded shadow-sm" style="max-width: 100%; height: auto;" />
+                        }
+                        else
+                        {
+                            <span class="text-muted">No image available</span>
+                        }
+                    </p>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <strong>@Html.DisplayNameFor(model => model.Ngaycapnhat):</strong>
+                    <p>@Html.DisplayFor(model => model.Ngaycapnhat)</p>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <strong>@Html.DisplayNameFor(model => model.Soluongton):</strong>
+                    <p>@Html.DisplayFor(model => model.Soluongton)</p>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <strong>@Html.DisplayNameFor(model => model.MaLX):</strong>
+                    <p>@Html.DisplayFor(model => model.MaLX)</p>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <strong>@Html.DisplayNameFor(model => model.MaNPP):</strong>
+                    <p>@Html.DisplayFor(model => model.MaNPP)</p>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer text-center">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                <button type="submit" class="btn btn-danger me-3">Delete</button>
+                @Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-secondary" })
+            }
+        </div>
+    </div>
+</div>

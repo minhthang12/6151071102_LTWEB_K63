@@ -1,0 +1,103 @@
+﻿@model List<CarBackend.Models.Cart>
+@{
+    ViewBag.Title = "Shopping Cart";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+<div class="container my-5">
+    <h2 class="text-center mb-4 text-primary">Your Shopping Cart</h2>
+
+    @if (Model.Count == 0)
+    {
+        <div class="alert alert-warning text-center" role="alert">
+            <p class="mb-0">Your cart is empty. <a href="@Url.Action("Index", "CarStore")" class="alert-link">Browse our car collection</a> to add items.</p>
+        </div>
+    }
+    else
+    {
+        <!-- Table Section -->
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered text-center">
+                <thead class="table-primary">
+                    <tr>
+                        <th>Car</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                        <th>Total</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                <strong>@item.carName</strong>
+                            </td>
+                            <td>
+                                <form action="@Url.Action("UpdateCart", "Cart")" method="post" class="d-flex justify-content-center align-items-center">
+                                    <input type="number" name="quantity" value="@item.quantity" min="1" class="form-control w-50 me-2 text-center" />
+                                    <input type="hidden" name="carID" value="@item.carID" />
+                                    <button type="submit" class="btn btn-primary btn-sm">Update</button>
+                                </form>
+                            </td>
+                            <td>@String.Format("{0:C}", item.price)</td>
+                            <td>@String.Format("{0:C}", item.total)</td>
+                            <td class="d-flex justify-content-center">
+                                <a href="@Url.Action("Details", "CarStore", new { id = item.carID })" class="btn btn-info btn-sm me-2">
+                                    <i class="fas fa-info-circle"></i> Details
+                                </a>
+                                <a href="@Url.Action("RemoveFromCart", "Cart", new { carID = item.carID })" class="btn btn-danger btn-sm">
+                                    <i class="fas fa-trash-alt"></i> Remove
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Cart Summary Section -->
+        <div class="row mt-4">
+            <div class="col-md-6">
+                <a href="@Url.Action("ClearAll", "Cart")" class="btn btn-warning w-100">
+                    <i class="fas fa-trash"></i> Clear All
+                </a>
+            </div>
+            <div class="col-md-6">
+                <a href="@Url.Action("Order", "Cart")" class="btn btn-success w-100">
+                    <i class="fas fa-shopping-cart"></i> Proceed to Order
+                </a>
+            </div>
+        </div>
+
+        <!-- Total Price Section -->
+        <div class="mt-4 text-end">
+            <p class="fs-5"><strong>Total Quantity:</strong> @ViewBag.TotalQuantity</p>
+            <p class="fs-5"><strong>Total Price:</strong> @String.Format("{0:C}", ViewBag.TotalPrice)</p>
+        </div>
+    }
+</div>
+
+<style>
+    .table th, .table td {
+        vertical-align: middle;
+    }
+
+    .table-responsive {
+        margin: 20px 0;
+    }
+
+    .btn-sm {
+        font-size: 0.85rem;
+    }
+
+    .alert {
+        margin-top: 20px;
+        font-size: 1.1rem;
+    }
+
+    h2 {
+        font-size: 2rem;
+    }
+</style>

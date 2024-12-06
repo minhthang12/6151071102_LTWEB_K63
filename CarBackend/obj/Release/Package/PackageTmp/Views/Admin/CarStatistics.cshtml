@@ -1,0 +1,109 @@
+﻿@model List<IGrouping<CarBackend.LOAIXE, CarBackend.XEGANMAY>>
+
+@{
+    ViewBag.Title = "Book Statistics";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<!-- Flex container for statistics and chart -->
+<div style="display: flex; justify-content: space-between;">
+
+    <!-- Left side: Statistics table -->
+    <div style="flex: 1; margin-right: 20px;">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Type Id</th>
+                    <th>Type Name</th>
+                    <th>Car Count</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var group in Model)
+                {
+                    <tr>
+                        <td>@group.Key.MaLX</td>
+                        <td>@group.Key.TenLoaiXe</td>
+                        <td>@group.Count()</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Right side: Chart -->
+    <div style="flex: 1;">
+        <!-- Button to switch chart types -->
+        <div>
+            <button id="switchChartBtn" class="btn btn-primary">Switch to Pie Chart</button>
+        </div>
+
+        <!-- Chart Container -->
+        <div>
+            <canvas id="carChart" width="400" height="200"></canvas>
+        </div>
+    </div>
+
+</div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    function generateRandomColor() {
+        var letters = '0123456789ABCDEF';
+        var color = '#';
+        for (var i = 0; i < 6; i++) {
+            color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+    }
+
+    var carLabels = @Html.Raw(Json.Encode(Model.Select(group => group.Key.TenLoaiXe).ToList()));
+    var carCounts = @Html.Raw(Json.Encode(Model.Select(group => group.Count()).ToList()));
+
+    var carColors = carCounts.map(function() {
+        return generateRandomColor();
+    });
+
+    var carData = {
+        labels: carLabels,
+        datasets: [{
+            label: 'Car Count',
+            data: carCounts,
+            backgroundColor: carColors, 
+            borderColor: carColors.map(function(color) {
+                return color; 
+            }),
+            borderWidth: 1
+        }]
+    };
+
+    var carOptions = {
+        responsive: true,
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    };
+
+    var ctx = document.getElementById('carChart').getContext('2d');
+    var carChart = new Chart(ctx, {
+        type: 'bar', 
+        data: carData,
+        options: carOptions
+    });
+
+    document.getElementById('switchChartBtn').addEventListener('click', function () {
+        var newType = carChart.config.type === 'bar' ? 'pie' : 'bar';
+        carChart.destroy(); 
+        carChart = new Chart(ctx, {
+            type: newType, 
+            data: carData,
+            options: carOptions
+        });
+        this.textContent = newType === 'bar' ? 'Switch to Pie Chart' : 'Switch to Bar Chart';
+    });
+</script>

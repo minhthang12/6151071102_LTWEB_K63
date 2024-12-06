@@ -1,0 +1,24 @@
+﻿@model IEnumerable<CarBackend.NHAPHANPHOI>
+
+<div class="container-fluid mt-5">
+    <div class="row">
+        <!-- Sidebar -->
+        <div class="col-md-10">
+            <div class="sidebar p-4 shadow-sm rounded">
+                <h3 class="mb-4 text-primary fw-bold">Distributors</h3>
+                <ul class="list-group elegant-list">
+                    @foreach (var item in Model)
+                    {
+                        <li class="list-group-item elegant-list-item">
+                            <a href="@Url.Action("CarWithDistributor", "CarStore", new { id = item.MaNPP })" class="text-decoration-none text-dark">
+                                <i class="fa fa-industry me-2 text-secondary"></i>@item.TenNPP
+                            </a>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+
+     
+    </div>
+</div>

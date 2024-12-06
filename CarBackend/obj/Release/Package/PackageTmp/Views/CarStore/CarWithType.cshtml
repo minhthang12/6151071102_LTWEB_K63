@@ -1,0 +1,46 @@
+﻿@model IEnumerable<CarBackend.XEGANMAY>
+
+@{
+    ViewBag.Title = "CarWithType";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+<div class="container my-5">
+    <div class="row g-4">
+        @foreach (var item in Model)
+        {
+            <div class="col-sm-6 col-lg-4" style="margin-top: -500px">
+                <div class="card shadow-lg border-0 h-80 elegant-card">
+                    <!-- Card Image Section -->
+                    <a href="@Url.Action("Details", "CarStore", new { id = item.MaXe })" class="text-decoration-none text-dark">
+                        <img src="~/Content/images/@item.Anhbia"
+                             alt="@item.TenXe"
+                             class="card-img-top rounded-top"
+                             style="object-fit: cover; height: 200px;">
+                        <div class="card-body text-center">
+                            <!-- Car Title -->
+                            <h5 class="card-title mb-3">@Html.DisplayFor(modelItem => item.TenXe)</h5>
+                            <!-- Star Rating -->
+                            <div class="stars mb-2">
+                                <span class="fa fa-star text-warning"></span>
+                                <span class="fa fa-star text-warning"></span>
+                                <span class="fa fa-star text-warning"></span>
+                                <span class="fa fa-star text-warning"></span>
+                                <span class="fa fa-star-half-alt text-warning"></span>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- View Details Button -->
+                    <div class="card-footer bg-transparent border-0 text-center">
+                        <button class="btn btn-gradient btn-sm w-100"
+                                onclick="location.href='@Url.Action("Details", "CarStore", new { id = item.MaXe })'">
+                            View Details
+                        </button>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
